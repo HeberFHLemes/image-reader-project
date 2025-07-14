@@ -59,7 +59,7 @@ public class ContentOutputService {
 
     /**
      * Adds file information to the 'files' HashMap, always checking for null values
-     * @param name the file name (e.g, "img.png")
+     * @param name the file name (e.g., "img.png")
      * @param content what was read in the OCR operation made on the file
      */
     public void addFile(String name, String content){
