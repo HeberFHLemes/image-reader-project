@@ -5,7 +5,7 @@ import net.sourceforge.tess4j.ITesseract;
 public class TesseractSetupService {
     
     public static void setup(ITesseract tesseract){
-        tesseract.setDatapath("imgreader/tessdata");
+        tesseract.setDatapath("tessdata");
         tesseract.setLanguage("por");
     }
 
