@@ -1,4 +1,4 @@
-package service;
+package com.imagereader.service;
 
 public class ImageReaderService {
     

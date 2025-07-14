@@ -1,4 +1,4 @@
-package service;
+package com.imagereader.service;
 
 import net.sourceforge.tess4j.Tesseract;
 
