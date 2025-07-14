@@ -44,6 +44,7 @@ public class ImageReaderService {
                 // System.out.println("Extracted text:\n" + text);
                 this.contentOutputService.addFile(image.getName(), text.trim());
                 
+                System.out.println(image.getName() + " text extracted successfully");
             } catch (TesseractException te){
                 System.err.println("Error reading " + image.getName() + ": " + te.getMessage());
             }
