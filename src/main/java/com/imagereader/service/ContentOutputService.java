@@ -10,12 +10,16 @@ import java.util.HashMap;
 
 public class ContentOutputService {
     
+    // Key: name of the file
+    // Value: content to be written
     private Map<String, String> files;
 
     public ContentOutputService(){
         this.files = new HashMap<>();
     }
 
+    // Writes/creates files .txt inside the output/ folder
+    // according to the data inside the HashMap 'files';
     public void output() throws IOException{
         Path dir = Path.of("output");
         Files.createDirectories(dir); 
@@ -32,7 +36,7 @@ public class ContentOutputService {
 
     public void addFiles(String[] fileNames, String[] fileContents){
         if (fileNames.length != fileContents.length){
-            System.out.println("The number of names and the number of contents does not match");
+            System.out.println("The number of filenames and the number of contents does not match");
             return;
         }
         for (int i = 0; i < fileNames.length; i++){
@@ -44,6 +48,8 @@ public class ContentOutputService {
         this.files.put(formatFileName(name), content);
     }
 
+    // Remove any unwanted extension (not double ones though)
+    // Since it will later be used with the addition of ".txt"
     private String formatFileName(String fileName){
         return fileName.contains(".") 
             ? fileName.substring(0, fileName.lastIndexOf('.')) 
