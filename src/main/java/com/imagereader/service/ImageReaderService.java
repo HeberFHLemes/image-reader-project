@@ -1,6 +1,7 @@
 package com.imagereader.service;
 
 import java.io.File;
+import java.io.IOException;
 
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
@@ -10,11 +11,12 @@ public class ImageReaderService {
 
     // (Tesseract class implements ITesseract interface)
     private ITesseract tesseract;
+    private ContentOutputService contentOutputService;
 
     public ImageReaderService(){
         this.tesseract = new Tesseract();
         TesseractSetupService.setup(this.tesseract);
-
+        this.contentOutputService = new ContentOutputService();
     }
 
     // Process the folder path, get the image files, and try to read them.
@@ -38,13 +40,15 @@ public class ImageReaderService {
                 // Calls tesseract method of OCR with the image
                 String text = this.tesseract.doOCR(image);
                 
-                // Outputs the processed text (will be converted to external file (.txt?))
-                System.out.println("Extracted text:\n" + text);
-
+                // Outputs the processed text (will be converted to external file (.txt)?)
+                // System.out.println("Extracted text:\n" + text);
+                this.contentOutputService.addFile(image.getName(), text.trim());
+                
             } catch (TesseractException te){
                 System.err.println("Error reading " + image.getName() + ": " + te.getMessage());
             }
         }
+        outputFiles();
     }
 
     // List files in the selected folder and puts them into an array
@@ -54,5 +58,13 @@ public class ImageReaderService {
             // Filtering .png, .jpg, .jpeg and .tif files
             return lower.endsWith(".png") || lower.endsWith(".jpg") || lower.endsWith(".jpeg") || lower.endsWith(".tif");
         });
+    }
+
+    private void outputFiles(){
+        try {
+            this.contentOutputService.output();
+        } catch (IOException ioe){
+            ioe.printStackTrace();
+        }
     }
 }
