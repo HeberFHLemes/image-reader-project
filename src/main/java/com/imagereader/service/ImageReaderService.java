@@ -19,8 +19,11 @@ public class ImageReaderService {
         this.contentOutputService = new ContentOutputService();
     }
 
-    // Process the folder path, get the image files, and try to read them.
-    // Then output the content
+    /**
+     * Process the folder path, get the image files, and try to read them.
+     * Then outputs the content.
+     * @param folderPath
+     */
     public void readImagesInFolder(String folderPath) {
 
         File folder = new File(folderPath);
@@ -40,11 +43,11 @@ public class ImageReaderService {
                 // Calls tesseract method of OCR with the image
                 String text = this.tesseract.doOCR(image);
                 
-                // Outputs the processed text (will be converted to external file (.txt)?)
-                // System.out.println("Extracted text:\n" + text);
+                // adds the file name and content read to the class responsible to output it.
                 this.contentOutputService.addFile(image.getName(), text.trim());
                 
                 System.out.println(image.getName() + " text extracted successfully");
+
             } catch (TesseractException te){
                 System.err.println("Error reading " + image.getName() + ": " + te.getMessage());
             }
@@ -52,7 +55,11 @@ public class ImageReaderService {
         outputFiles();
     }
 
-    // List files in the selected folder and puts them into an array
+    /**
+     * List files in the selected folder and puts them into an array
+     * @param folder the folder to have its files listed
+     * @return an array of files that ends with either ".png". "jpg", ".jpeg" or ".tif"
+     */
     private File[] listImageFiles(File folder){
         return folder.listFiles((_, name) -> {
             String lower = name.toLowerCase();
