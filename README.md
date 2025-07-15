@@ -29,5 +29,8 @@ To use another language:
 ### References
 - [Tess4J](https://github.com/nguyenq/tess4j) – Java wrapper for Tesseract OCR
 - [tessdata](https://github.com/tesseract-ocr/tessdata) – Official Tesseract language files
+- [slf4j](https://github.com/qos-ch/slf4j) - Simple Logging Facade for Java
 
 > Both Tess4J and tessdata are licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+> 
+> slf4j is licensed under the [MIT License](https://github.com/qos-ch/slf4j/blob/master/LICENSE.txt)
