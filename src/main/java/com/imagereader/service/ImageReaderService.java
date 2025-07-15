@@ -3,6 +3,9 @@ package com.imagereader.service;
 import java.io.File;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
@@ -12,6 +15,8 @@ public class ImageReaderService {
     // (Tesseract class implements ITesseract interface)
     private ITesseract tesseract;
     private ContentOutputService contentOutputService;
+
+    private static final Logger logger = LoggerFactory.getLogger(ImageReaderService.class);
 
     public ImageReaderService(){
         this.tesseract = new Tesseract();
@@ -36,23 +41,25 @@ public class ImageReaderService {
         }
 
         for (File image : imageFiles){
-            try {
+            
+            logger.info("Now processing " + image.getName() + " ...");
 
-                System.out.println("Now processing " + image.getName() + " ...");
-                
+            try {
                 // Calls tesseract method of OCR with the image
                 String text = this.tesseract.doOCR(image);
                 
                 // adds the file name and content read to the class responsible to output it.
                 this.contentOutputService.addFile(image.getName(), text.trim());
                 
-                System.out.println(image.getName() + " text extracted successfully");
+                logger.info(image.getName() + " text extracted successfully");
 
             } catch (TesseractException te){
-                System.err.println("Error reading " + image.getName() + ": " + te.getMessage());
+                logger.error(te.getMessage(), te);
             }
         }
         outputFiles();
+        
+        logger.info("All operations finished.");
     }
 
     /**
@@ -68,11 +75,14 @@ public class ImageReaderService {
         });
     }
 
+    /**
+     * Calls the {@code output()} method from {@code ContentOutputService}.
+     */
     private void outputFiles(){
         try {
             this.contentOutputService.output();
         } catch (IOException ioe){
-            ioe.printStackTrace();
+            logger.error(ioe.getMessage(), ioe);
         }
     }
 }

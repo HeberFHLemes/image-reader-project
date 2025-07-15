@@ -16,6 +16,9 @@ public abstract class TesseractSetupService {
     public static void setup(ITesseract tesseract){
         tesseract.setDatapath("tessdata");
         tesseract.setLanguage("por");
+        
+        // Define the dpi value as 300
+        tesseract.setVariable("user_defined_dpi", "300");
     }
 
     /**
@@ -28,5 +31,8 @@ public abstract class TesseractSetupService {
     public static void setup(ITesseract tesseract, String datapath, String language){
         tesseract.setDatapath(datapath);
         tesseract.setLanguage(language);
+
+        // Because it was reading the dpi of the images that are being treated as "1"
+        tesseract.setVariable("user_defined_dpi", "300");
     }
 }
