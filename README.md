@@ -19,7 +19,7 @@ OCR - Optical Character Recognition
 The default OCR language used in this project is **Portuguese**.
 
 To use another language:
--  VIsit [https://github.com/tesseract-ocr/tessdata](https://github.com/tesseract-ocr/tessdata)
+-  Visit [https://github.com/tesseract-ocr/tessdata](https://github.com/tesseract-ocr/tessdata)
 -  Download the desired language file
 -  Add the file inside the `tessdata/` folder
 -  Update the code to use the new language as needed
