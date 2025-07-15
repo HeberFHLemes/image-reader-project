@@ -8,7 +8,7 @@ OCR - Optical Character Recognition
 ---
 
 ### Usage: 
-1. Place the images you want to proccess inside the `images/` folder;
+1. Place the images you want to process inside the `images/` folder;
 2. Run the application. 
 3. The output `.txt` files will be inside the `output/` folder, with the same name as the original image.
 
