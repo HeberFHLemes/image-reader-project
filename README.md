@@ -31,6 +31,6 @@ To use another language:
 - [tessdata](https://github.com/tesseract-ocr/tessdata) – Official Tesseract language files
 - [slf4j](https://github.com/qos-ch/slf4j) - Simple Logging Facade for Java
 
-> Both Tess4J and tessdata are licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+> Both Tess4J and tessdata are licensed under the [Apache License 2.0](LICENSES/Apache-2.0.txt)
 > 
-> slf4j is licensed under the [MIT License](https://github.com/qos-ch/slf4j/blob/master/LICENSE.txt)
+> slf4j is licensed under the [MIT License](LICENSES/MIT-slf4j.txt)
