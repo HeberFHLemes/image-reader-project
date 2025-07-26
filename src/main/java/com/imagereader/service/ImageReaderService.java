@@ -10,24 +10,27 @@ import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
+/**
+ * Responsible for the OCR operation, then calls
+ * the output service to send the content read to
+ * a respective text file.
+ */
 public class ImageReaderService {
 
     // (Tesseract class implements ITesseract interface)
-    private ITesseract tesseract;
-    private ContentOutputService contentOutputService;
+    private final ITesseract tesseract = new Tesseract();
+    private final ContentOutputService contentOutputService = new ContentOutputService();
 
     private static final Logger logger = LoggerFactory.getLogger(ImageReaderService.class);
 
     public ImageReaderService(){
-        this.tesseract = new Tesseract();
         TesseractSetupService.setup(this.tesseract);
-        this.contentOutputService = new ContentOutputService();
     }
 
     /**
      * Process the folder path, get the image files, and try to read them.
      * Then outputs the content.
-     * @param folderPath
+     * @param folderPath path to the folder with the images files
      */
     public void readImagesInFolder(String folderPath) {
 
@@ -41,8 +44,8 @@ public class ImageReaderService {
         }
 
         for (File image : imageFiles){
-            
-            logger.info("Now processing " + image.getName() + " ...");
+
+            logger.info("Now processing {} ...", image.getName());
 
             try {
                 // Calls tesseract method of OCR with the image
@@ -50,8 +53,8 @@ public class ImageReaderService {
                 
                 // adds the file name and content read to the class responsible to output it.
                 this.contentOutputService.addFile(image.getName(), text.trim());
-                
-                logger.info(image.getName() + " text extracted successfully");
+
+                logger.info("{} text extracted successfully", image.getName());
 
             } catch (TesseractException te){
                 logger.error(te.getMessage(), te);
@@ -68,7 +71,7 @@ public class ImageReaderService {
      * @return an array of files that ends with either ".png". "jpg", ".jpeg" or ".tif"
      */
     private File[] listImageFiles(File folder){
-        return folder.listFiles((_, name) -> {
+        return folder.listFiles((dir, name) -> {
             String lower = name.toLowerCase();
             // Filtering .png, .jpg, .jpeg and .tif files
             return lower.endsWith(".png") || lower.endsWith(".jpg") || lower.endsWith(".jpeg") || lower.endsWith(".tif");

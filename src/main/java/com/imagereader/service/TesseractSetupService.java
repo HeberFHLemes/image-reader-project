@@ -2,6 +2,9 @@ package com.imagereader.service;
 
 import net.sourceforge.tess4j.ITesseract;
 
+/**
+ * Responsible to set the desired configurations on the Tesseract object
+ */
 public abstract class TesseractSetupService {
     
     /**
@@ -16,9 +19,13 @@ public abstract class TesseractSetupService {
     public static void setup(ITesseract tesseract){
         tesseract.setDatapath("tessdata");
         tesseract.setLanguage("por");
-        
+
         // Define the dpi value as 300
         tesseract.setVariable("user_defined_dpi", "300");
+
+        // Use env variables if wanted
+        // tesseract.setDatapath(System.getenv("TESSDATA_DATAPATH"));
+        // tesseract.setLanguage(System.getenv("TESSDATA_LANGUAGE"));
     }
 
     /**

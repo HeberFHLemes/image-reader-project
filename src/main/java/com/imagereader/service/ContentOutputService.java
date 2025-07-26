@@ -3,30 +3,35 @@ package com.imagereader.service;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Objects;
 
+/**
+ * Responsible for taking the file names and
+ * the content read from the OCR and then output
+ * the content on an output folder inside a
+ * text file with the same name as the image.
+ */
 public class ContentOutputService {
     
     /**
      * Key: name of the file
      * Value: content to be written
      */
-    private Map<String, String> files;
+    private final Map<String, String> files = new HashMap<>();
 
     private final Path outputDir = Path.of("output");
+    // Use env variables if wanted
+    // private final Path outputDir = Path.of(System.getenv("OUTPUT_FOLDER"));
 
-    public ContentOutputService(){
-        this.files = new HashMap<>();
-    }
+    public ContentOutputService(){}
 
     /**
-     * Writes/creates files '.txt' inside the destinated output folder
+     * Writes/creates files '.txt' inside the output folder
      * according to the data inside the HashMap 'files'
-     * @throws IOException
+     * @throws IOException when it tries to create directories or write into the output files
      */
     public void output() throws IOException{
         
@@ -35,17 +40,16 @@ public class ContentOutputService {
         for (Entry<String, String> entry : this.files.entrySet()){
             String fileName = entry.getKey() + ".txt";
             Path path = outputDir.resolve(fileName);
-            Files.write(
-                path,
-                entry.getValue().getBytes(StandardCharsets.UTF_8)
+            Files.writeString(
+                path, entry.getValue()
             );
         }
     }
 
     /**
      * Optional method for addFile(String name, String content).
-     * @param fileNames
-     * @param fileContents
+     * @param fileNames a String array of the file names (e.g., {"img.png", "img2.png"})
+     * @param fileContents a String array of what was read in the OCR operation made on the files
      */
     public void addFiles(String[] fileNames, String[] fileContents){
         if (fileNames.length != fileContents.length){
