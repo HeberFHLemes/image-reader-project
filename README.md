@@ -36,7 +36,6 @@ java -jar .\target\image-reader-project-1.0-SNAPSHOT.jar
 ```
 
 ---
-
 <h3 align='center'>
 Language Support
 </h3>
@@ -54,10 +53,15 @@ To use another language:
 References
 </h3>
 
-- [Tess4J](https://github.com/nguyenq/tess4j) – Java wrapper for Tesseract OCR
-- [tessdata](https://github.com/tesseract-ocr/tessdata) – Official Tesseract language files
-- [slf4j](https://github.com/qos-ch/slf4j) - Simple Logging Facade for Java
-- [Apache Maven](https://maven.apache.org/) - Build tool for Java projects
+- [Tess4J](https://github.com/nguyenq/tess4j) – Java wrapper for Tesseract OCR  
+- [tessdata](https://github.com/tesseract-ocr/tessdata) – Official Tesseract language files  
+- [SLF4J](https://github.com/qos-ch/slf4j) - Simple Logging Facade for Java  
+- [Apache Maven](https://maven.apache.org/) - Build tool for Java projects  
 
-> [!NOTE]
-> Tess4J, tessdata and Apache Maven are licensed under the [Apache License 2.0](LICENSES/Apache-2.0.txt). slf4j is licensed under the [MIT License](LICENSES/MIT-slf4j.txt).
+---
+
+##### This project is licensed under [MIT License](LICENSE).
+
+##### Tess4J, tessdata, and Apache Maven are licensed under the [Apache License 2.0](LICENSES/Apache-2.0.txt).
+
+##### SLF4J is licensed under the [MIT License](LICENSES/MIT-slf4j.txt).
